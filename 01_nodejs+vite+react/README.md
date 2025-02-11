@@ -42,7 +42,9 @@ npm run dev
 ```
 
 **extations for react**
+
 [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+
 [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 
 [React](https://react.dev/learn/start-a-new-react-project)
