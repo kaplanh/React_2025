@@ -36,9 +36,10 @@ npm run dev
 
 [React](https://react.dev/learn/start-a-new-react-project)
 
-***If we want to remove a framework or library from the package.json file and install the latest version***
+**_If we want to remove a framework or library from the package.json file and install the latest version_**
 `pnpm uninstall react react-dom`
 `$ pnpm i react@latest react-dom@latest`
 
 [npm](https://www.npmjs.com/package/react)
 
+We can think of npm like the Android playstore of the web.
