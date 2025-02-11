@@ -1,11 +1,22 @@
 # 2025 React
 
 **first of all check nodejs with bash**
+
 `node -v or node --version`
+
 [nodejs](https://nodejs.org/en)
 
 **vite**
-`pnpm create vite my-react-app --template react` or `$ yarn create vite my-react-app --template react` or `npm create vite@latest my-react-app -- --template react`
+`pnpm create vite my-react-app --template react` 
+
+or 
+
+`$ yarn create vite my-react-app --template react` 
+
+or 
+
+`npm create vite@latest my-react-app -- --template react`
+
 [vite](https://vite.dev/guide/)
 
 ```
@@ -38,6 +49,7 @@ npm run dev
 
 **_If we want to remove a framework or library from the package.json file and install the latest version_**
 `pnpm uninstall react react-dom`
+
 `$ pnpm i react@latest react-dom@latest`
 
 [npm](https://www.npmjs.com/package/react)
