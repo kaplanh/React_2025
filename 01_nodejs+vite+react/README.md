@@ -7,13 +7,13 @@
 [nodejs](https://nodejs.org/en)
 
 **vite**
-`pnpm create vite my-react-app --template react` 
+`pnpm create vite my-react-app --template react`
 
-or 
+or
 
-`$ yarn create vite my-react-app --template react` 
+`$ yarn create vite my-react-app --template react`
 
-or 
+or
 
 `npm create vite@latest my-react-app -- --template react`
 
@@ -47,7 +47,7 @@ npm run dev
 
 [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 
-[React](https://react.dev/learn/start-a-new-react-project)
+[React Official Document](https://react.dev/learn/start-a-new-react-project)
 
 **_If we want to remove a framework or library from the package.json file and install the latest version_**
 `pnpm uninstall react react-dom`
