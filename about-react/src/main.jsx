@@ -146,6 +146,7 @@ function TeamMembers() {
 }
 
 function TeamMember({
+    //Destructuring
     name,
     description,
     image,
