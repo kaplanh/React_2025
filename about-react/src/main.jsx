@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import "./App.css";
+import { StrictMode } from "react";
 const rootElement = document.querySelector("#root");
 const teamMembersData = [
     {
@@ -67,6 +68,7 @@ function TeamMembers() {
             {teamMembersData.map((member) => (
                 <TeamMember
                     key={member.name}
+                    // Keys tell React which array item each component corresponds to, so that it can match them up later. This becomes important if your array items can move (e.g. due to sorting), get inserted, or get deleted. A well-chosen key helps React infer what exactly has happened, and make the correct updates to the DOM tree.
                     name={member.name}
                     description={member.description}
                     image={member.image}
@@ -170,4 +172,9 @@ function TeamMember({
     );
 }
 
-createRoot(rootElement).render(<App />);
+createRoot(rootElement).render(
+    //?We use StrictMode to give more advanced errors during project development.
+    <StrictMode>
+        <App />
+    </StrictMode>
+);
