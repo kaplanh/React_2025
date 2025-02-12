@@ -1,4 +1,4 @@
-# JSX and Props
+# JSX, Props and map
 
 ## JSX and Rules
 
