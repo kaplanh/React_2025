@@ -1,8 +1,26 @@
-# React + Vite
+# State
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```
 
-Currently, two official plugins are available:
+import { useState } from "react";
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+function App() {
+    const [count, setcount] = useState(0);
+    //1.weg
+    function handleDecrement() {
+        if (count >= 1) {
+            setcount(count - 1);
+        }
+    }
+    return (
+        <>
+            <h1>count:{count}</h1>
+            <button onClick={() => setcount(count + 1)}>increment</button>
+            //2.weg
+            <button onClick={handleDecrement}>decrement</button>
+        </>
+    );
+}
+
+
+```
