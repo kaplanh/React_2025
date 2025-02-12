@@ -4,7 +4,7 @@
 
 [Babel](https://babeljs.io/)
 
--   parent div or fragment(<></>)
+1.  parent div or fragment(<></>)
 
 ```
       function Header() {
@@ -20,7 +20,7 @@
 
 ```
 
--   <br> => <br/> and <img> => <img/>
--   class => className
--   for => htmlFor
--   <h1>count<h1/> => <h1>{count}<h1/> or  <img src={url/>
+2. br> => <br/> and <img> => <img/>
+3. class => className
+4. for => htmlFor
+5. <h1>count<h1/> => <h1>{count}<h1/> or  <img src={url/>
