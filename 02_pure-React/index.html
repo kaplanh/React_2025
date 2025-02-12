@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pure React</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- we must added this script and  
+        1- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+        
+        2- <script type="text/babel">
+        -->
+
+        <script type="text/babel">
+            /*const rootElement=document.querySelector('#root')
+                                    const element=React.createElement('h1',null,'Hello React');
+                                    ReactDOM.createRoot(rootElement).render(element);
+            */
+
+            /* const rootElement = document.querySelector("#root");
+                                    const element = React.createElement(
+                                        "div",
+                                        null,
+                                        React.createElement(
+                                            "h1",
+                                            { style: { color: "blue" } },
+                                            "Pure React"
+                                        ),
+                                        React.createElement("p", null, "We aren't using JSX now")
+                                    );
+                                    ReactDOM.createRoot(rootElement).render(element);
+                                    */
+
+            //JSX Version
+            const rootElement = document.querySelector("#root");
+
+            const element = (
+                <div>
+                    <h1 style={{ color: "blue" }}>Pure React </h1>
+                    <p>We are using JSX </p>
+                </div>
+            );
+
+            ReactDOM.createRoot(rootElement).render(element);
+        </script>
+    </body>
+</html>
