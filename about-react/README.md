@@ -1,12 +1,11 @@
 # JSX rules
 
+[Babel](https://babeljs.io/)
 **babel convert jsx to react**
 
-[Babel](https://babeljs.io/)
-
+```
 1.  parent div or fragment(<></>)
 
-```
       function Header() {
         return (
             <div className="title">
@@ -18,9 +17,11 @@
          );
       }
 
-```
+
 
 2. br> => <br/> and <img> => <img/>
 3. class => className
 4. for => htmlFor
-5. <h1>count<h1/> => <h1>{count}<h1/> or  <img src={url/>
+5. <h1>count<h1/> => <h1>{count}<h1/> or  <img src={url}/>
+
+```
