@@ -1,7 +1,7 @@
 # JSX rules
 
 [Babel](https://babeljs.io/)
-**babel convert jsx to react**
+**Babel is a JavaScript compiler.Babel can convert JSX syntax!**
 
 ```
 1.  parent div or fragment(<></>)
