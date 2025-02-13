@@ -15,6 +15,7 @@ function App() {
     return (
         <div className="container">
             <div className="table-wrapper">
+                <Header />
                 <EmployeeList employees={employees} />
             </div>
         </div>
