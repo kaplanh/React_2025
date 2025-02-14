@@ -12,7 +12,19 @@ function App() {
             phone: "(204) 619-5731",
         },
     ]);
+
     const [isAddModalOpen, setisAddModalOpen] = useState(false);
+
+    function addEmployee(newEmployee) {
+        setEmployees((prevEmployees) => [
+            ...prevEmployees,
+
+            {
+                ...newEmployee,
+                id: Math.max(...prevEmployees.map((emp) => emp.id), 0) + 1, //https://www.npmjs.com/package/uuid ilede olusturulabilir
+            },
+        ]);
+    }
 
     return (
         <div className="container">
@@ -23,7 +35,10 @@ function App() {
                     setisAddModalOpen={setisAddModalOpen}
                 />
                 {isAddModalOpen ? (
-                    <AddEmployeeModal setisAddModalOpen={setisAddModalOpen} />
+                    <AddEmployeeModal
+                        setisAddModalOpen={setisAddModalOpen}
+                        onAddEmployee={addEmployee}
+                    />
                 ) : null}
             </div>
         </div>
@@ -57,7 +72,7 @@ function Header({ setisAddModalOpen }) {
     );
 }
 
-function AddEmployeeModal({ setisAddModalOpen }) {
+function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -71,8 +86,17 @@ function AddEmployeeModal({ setisAddModalOpen }) {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); //auto refresh cclosed
         // console.log("formData", formData);
+        onAddEmployee(formData); //state lifting up
+        setisAddModalOpen(false); //model closed
+        setFormData({
+            name: "",
+            email: "",
+            address: "",
+            phone: "",
+            //form input fields reset
+        });
     }
     return (
         <>
