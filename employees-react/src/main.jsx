@@ -78,6 +78,8 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
         email: "",
         address: "",
         phone: "",
+        gender: "",
+        department: "",
     });
     function handleChange(e) {
         const { name, value } = e.target;
@@ -95,6 +97,21 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
             email: "",
             address: "",
             phone: "",
+            gender: "",
+            department: "",
+            //form input fields reset
+        });
+    }
+
+    function handleCancel(e) {
+        setisAddModalOpen(false);
+        setFormData({
+            name: "",
+            email: "",
+            address: "",
+            phone: "",
+            gender: "",
+            department: "",
             //form input fields reset
         });
     }
@@ -161,8 +178,55 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
                                     />
                                 </div>
                             </div>
+                            <div className="form-group">
+                                <label>Gender</label>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Male"
+                                            checked={formData.gender === "Male"}
+                                            onChange={handleChange}
+                                        />
+                                        Male
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Female"
+                                            checked={
+                                                formData.gender === "Female"
+                                            }
+                                            onChange={handleChange}
+                                        />
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="">Department</label>
+                                <div>
+                                    <select
+                                        name="department"
+                                        value={FormData.department}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="" disabled>
+                                            Select Department
+                                        </option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="HR">HR</option>
+                                        <option value="Development">
+                                            Development
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div className="modal-footer">
                                 <button
+                                    onClick={handleCancel}
                                     type="button"
                                     className="btn btn-default"
                                 >
@@ -200,6 +264,8 @@ function EmployeeList({ employees }) {
                     <th>Email</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Department</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -214,7 +280,7 @@ function EmployeeList({ employees }) {
 
 function EmployeeItem({ employee }) {
     // console.log(employee);
-    const { name, email, address, phone } = employee; //Destructuring
+    const { name, email, address, phone, gender, department } = employee; //Destructuring
     return (
         <tr>
             <td>
@@ -233,6 +299,8 @@ function EmployeeItem({ employee }) {
             <td>{email}</td>
             <td>{address}</td>
             <td>{phone}</td>
+            <td>{gender}</td>
+            <td>{department}</td>
             <td>
                 <a
                     href="#editEmployeeModal"
