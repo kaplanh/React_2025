@@ -1,8 +1,6 @@
 import EmployeeItem from "./EmployeeItem";
 
 function EmployeeList({ employees }) {
-    // console.log("emp", employees);
-
     return (
         <table className="table table-striped table-hover">
             <thead>
@@ -30,4 +28,5 @@ function EmployeeList({ employees }) {
         </table>
     );
 }
+
 export default EmployeeList;
