@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
+function AddEmployeeModal({ isOpen, onCloseAddModal, onAddEmployee }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -9,17 +9,19 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
         gender: "",
         department: "",
     });
+
     function handleChange(e) {
         const { name, value } = e.target;
-        setFormData((prevState) => ({ ...prevState, [name]: value }));
-        // setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     }
 
     function handleSubmit(e) {
-        e.preventDefault(); //auto refresh cclosed
-        // console.log("formData", formData);
-        onAddEmployee(formData); //state lifting up
-        setisAddModalOpen(false); //model closed
+        e.preventDefault();
+        onAddEmployee(formData);
+        onCloseAddModal();
         setFormData({
             name: "",
             email: "",
@@ -27,12 +29,11 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
             phone: "",
             gender: "",
             department: "",
-            //form input fields reset
         });
     }
 
-    function handleCancel(e) {
-        setisAddModalOpen(false);
+    function handleCancel() {
+        onCloseAddModal();
         setFormData({
             name: "",
             email: "",
@@ -40,9 +41,11 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
             phone: "",
             gender: "",
             department: "",
-            //form input fields reset
         });
     }
+
+    if (!isOpen) return null;
+
     return (
         <>
             <div id="addEmployeeModal" className="modal fade show">
@@ -52,7 +55,7 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
                             <div className="modal-header">
                                 <h4 className="modal-title">Add Employee</h4>
                                 <button
-                                    onClick={() => setisAddModalOpen(false)}
+                                    onClick={onCloseAddModal}
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
@@ -105,51 +108,55 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label>Gender</label>
-                                <div>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="gender"
-                                            value="Male"
-                                            checked={formData.gender === "Male"}
-                                            onChange={handleChange}
-                                        />
-                                        Male
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="gender"
-                                            value="Female"
-                                            checked={
-                                                formData.gender === "Female"
-                                            }
-                                            onChange={handleChange}
-                                        />
-                                        Female
-                                    </label>
+                                <div className="form-group">
+                                    <label>Gender</label>
+                                    <div>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="gender"
+                                                value="Male"
+                                                checked={
+                                                    formData.gender === "Male"
+                                                }
+                                                onChange={handleChange}
+                                            />
+                                            Male
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="gender"
+                                                value="Female"
+                                                checked={
+                                                    formData.gender === "Female"
+                                                }
+                                                onChange={handleChange}
+                                            />
+                                            Female
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="">Department</label>
-                                <div>
-                                    <select
-                                        name="department"
-                                        value={FormData.department}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="" disabled>
-                                            Select Department
-                                        </option>
-                                        <option value="Finance">Finance</option>
-                                        <option value="HR">HR</option>
-                                        <option value="Development">
-                                            Development
-                                        </option>
-                                    </select>
+                                <div className="form-group">
+                                    <label>Department</label>
+                                    <div>
+                                        <select
+                                            name="department"
+                                            value={formData.department}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>
+                                                Select Department
+                                            </option>
+                                            <option value="Finance">
+                                                Finance
+                                            </option>
+                                            <option value="HR">HR</option>
+                                            <option value="Development">
+                                                Development
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -175,4 +182,5 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
         </>
     );
 }
+
 export default AddEmployeeModal;
