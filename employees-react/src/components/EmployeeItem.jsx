@@ -1,6 +1,4 @@
 function EmployeeItem({ employee }) {
-    // console.log(employee);
-    const { name, email, address, phone, gender, department } = employee; //Destructuring
     return (
         <tr>
             <td>
@@ -14,13 +12,12 @@ function EmployeeItem({ employee }) {
                     <label htmlFor="checkbox1"></label>
                 </span>
             </td>
-
-            <td>{name}</td>
-            <td>{email}</td>
-            <td>{address}</td>
-            <td>{phone}</td>
-            <td>{gender}</td>
-            <td>{department}</td>
+            <td>{employee.name}</td>
+            <td>{employee.email}</td>
+            <td>{employee.address}A</td>
+            <td>{employee.phone}</td>
+            <td>{employee.gender}</td>
+            <td>{employee.department}</td>
             <td>
                 <a
                     href="#editEmployeeModal"
