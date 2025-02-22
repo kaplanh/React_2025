@@ -16,7 +16,7 @@ function App() {
         },
     ]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const [isEditModalOpen, setisEditModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     function addEmployee(newEmployee) {
@@ -47,12 +47,12 @@ function App() {
     }
 
     function editClick(employee) {
-        setisEditModalOpen(true);
+        setIsEditModalOpen(true);
         setSelectedEmployee(employee);
     }
 
     function closeEditModal() {
-        setisEditModalOpen(false);
+        setIsEditModalOpen(false);
         setSelectedEmployee(null);
     }
 
