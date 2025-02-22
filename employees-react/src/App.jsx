@@ -14,10 +14,18 @@ function App() {
             address: "89 Chiaroscuro Rd, Portland, USA",
             phone: "(171) 555-2222",
         },
+        {
+            id: 2,
+            name: "Ricardo Quaresma",
+            email: "ricody@mail.com",
+            address: "89 Chiaroscuro Rd, Portland, USA",
+            phone: "(171) 555-2222",
+        },
     ]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
+    const [selectedEmployees, setSelectedEmployees] = useState([]);
 
     function addEmployee(newEmployee) {
         setEmployees((prevEmployees) => [
@@ -30,7 +38,7 @@ function App() {
     }
 
     function editEmployee(updatedEmployee) {
-        console.log("updatedEmployee", updatedEmployee);
+        // console.log("updatedEmployee", updatedEmployee);
         setEmployees((prevEmployees) => {
             return prevEmployees.map((emp) => {
                 return emp.id === updatedEmployee.id ? updatedEmployee : emp;
@@ -50,6 +58,17 @@ function App() {
         setIsEditModalOpen(true);
         setSelectedEmployee(employee);
     }
+    function deleteClick(employee) {
+        console.log("deletedEmployee", employee);
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this employee?"
+        );
+        if (confirmed) {
+            setEmployees((prevEmployees) =>
+                prevEmployees.filter((emp) => emp.id !== employee.id)
+            );
+        }
+    }
 
     function closeEditModal() {
         setIsEditModalOpen(false);
@@ -60,7 +79,11 @@ function App() {
         <div className="container">
             <div className="table-wrapper">
                 <Header onOpenAddModal={() => setIsAddModalOpen(true)} />
-                <EmployeeList employees={employees} onEditClick={editClick} />
+                <EmployeeList
+                    employees={employees}
+                    onEditClick={editClick}
+                    onDeleteClick={deleteClick}
+                />
                 <AddEmployeeModal
                     isOpen={isAddModalOpen}
                     onCloseAddModal={() => setIsAddModalOpen(false)}

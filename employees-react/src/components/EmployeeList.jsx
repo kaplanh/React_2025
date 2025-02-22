@@ -1,6 +1,6 @@
 import EmployeeItem from "./EmployeeItem";
 
-function EmployeeList({ employees, onEditClick }) {
+function EmployeeList({ employees, onEditClick, onDeleteClick }) {
     return (
         <table className="table table-striped table-hover">
             <thead>
@@ -26,6 +26,7 @@ function EmployeeList({ employees, onEditClick }) {
                         key={employee.id}
                         employee={employee}
                         onEditClick={onEditClick}
+                        onDeleteClick={onDeleteClick}
                     />
                 ))}
             </tbody>

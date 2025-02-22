@@ -1,6 +1,10 @@
-function EmployeeItem({ employee, onEditClick }) {
+function EmployeeItem({ employee, onEditClick, onDeleteClick }) {
     function handleEditClick() {
         onEditClick(employee);
+    }
+
+    function handleDeleteClick() {
+        onDeleteClick(employee);
     }
     return (
         <tr>
@@ -31,11 +35,7 @@ function EmployeeItem({ employee, onEditClick }) {
                         &#xE254;
                     </i>
                 </a>
-                <a
-                    href="#deleteEmployeeModal"
-                    className="delete"
-                    data-toggle="modal"
-                >
+                <a onClick={handleDeleteClick} className="delete">
                     <i
                         className="material-icons"
                         data-toggle="tooltip"
