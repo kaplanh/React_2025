@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import AddEmployeeModal from "./components/AddEmployeeModal";
 import EmployeeList from "./components/EmployeeList";
+import EditEmployeeModal from "./components/EditEmployeeModal";
 
 function App() {
     const [employees, setEmployees] = useState([
@@ -14,6 +15,9 @@ function App() {
             phone: "(171) 555-2222",
         },
     ]);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isEditModalOpen, setisEditModalOpen] = useState(false);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     function addEmployee(newEmployee) {
         setEmployees((prevEmployees) => [
@@ -25,17 +29,53 @@ function App() {
         ]);
     }
 
-    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    function editEmployee(updatedEmployee) {
+        console.log("updatedEmployee", updatedEmployee);
+        setEmployees((prevEmployees) => {
+            return prevEmployees.map((emp) => {
+                return emp.id === updatedEmployee.id ? updatedEmployee : emp;
+            });
+        });
+
+        // ?asagidaki sekilde süslü kullanmazsak return yazmaya gerek kalmadanda yazabiliriz
+
+        // setEmployees((prevEmployees) =>
+        //     prevEmployees.map((emp) =>
+        //         emp.id === updatedEmployee.id ? updatedEmployee : emp
+        //     )
+        // );
+    }
+
+    function editClick(employee) {
+        setisEditModalOpen(true);
+        setSelectedEmployee(employee);
+    }
+
+    function closeEditModal() {
+        setisEditModalOpen(false);
+        setSelectedEmployee(null);
+    }
 
     return (
         <div className="container">
             <div className="table-wrapper">
                 <Header onOpenAddModal={() => setIsAddModalOpen(true)} />
-                <EmployeeList employees={employees} />
+                <EmployeeList employees={employees} onEditClick={editClick} />
                 <AddEmployeeModal
                     isOpen={isAddModalOpen}
                     onCloseAddModal={() => setIsAddModalOpen(false)}
                     onAddEmployee={addEmployee}
+                />
+                <EditEmployeeModal
+                    isOpen={isEditModalOpen}
+                    employee={selectedEmployee}
+                    onCloseEditModal={closeEditModal}
+                    // ? bu sekildede yazilabilir birden fazla satir icin süslü lazim unutma
+                    // onCloseEditModal={() => {
+                    //     setisEditModalOpen(false);
+                    //     setSelectedEmployee(null);
+                    // }}
+                    onEditEmployee={editEmployee}
                 />
             </div>
         </div>
