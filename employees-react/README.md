@@ -257,3 +257,38 @@ function AddEmployeeModal({ setisAddModalOpen, onAddEmployee }) {
 
 
 ```
+
+# LocalStorage
+
+```
+
+function App() {
+
+### for getting
+ const [employees, setEmployees] = useState(() => {
+        const savedEmployees = localStorage.getItem("employees");
+        return savedEmployees ? JSON.parse(savedEmployees) : [];
+    });
+
+### for adding
+
+     useEffect(() => {
+        localStorage.setItem("employees", JSON.stringify(employees));
+    }, [employees])
+
+
+    return (
+        <div className="container">
+        ...
+        </div>)
+    }
+
+```
+
+### for deleting
+
+```
+useEffect(() => {
+localStorage.removeItem("employees")
+}, []);
+```
