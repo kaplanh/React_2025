@@ -67,6 +67,20 @@ function App() {
             setEmployees((prevEmployees) =>
                 prevEmployees.filter((emp) => emp.id !== employee.id)
             );
+            setSelectedEmployees([]);
+        }
+    }
+    function deleteSelectedEmployees(employee) {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete the employees?"
+        );
+        if (confirmed) {
+            setEmployees((prevEmployees) =>
+                prevEmployees.filter(
+                    (emp) => !selectedEmployees.includes(emp.id)
+                )
+            );
+            setSelectedEmployees([]);
         }
     }
 
@@ -78,11 +92,16 @@ function App() {
     return (
         <div className="container">
             <div className="table-wrapper">
-                <Header onOpenAddModal={() => setIsAddModalOpen(true)} />
+                <Header
+                    onOpenAddModal={() => setIsAddModalOpen(true)}
+                    onDeleteSelected={deleteSelectedEmployees}
+                />
                 <EmployeeList
                     employees={employees}
                     onEditClick={editClick}
                     onDeleteClick={deleteClick}
+                    selectedEmployees={selectedEmployees}
+                    setSelectedEmployees={setSelectedEmployees}
                 />
                 <AddEmployeeModal
                     isOpen={isAddModalOpen}

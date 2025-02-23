@@ -1,4 +1,10 @@
-function EmployeeItem({ employee, onEditClick, onDeleteClick }) {
+function EmployeeItem({
+    employee,
+    onEditClick,
+    onDeleteClick,
+    isSelected,
+    onToggleSelect,
+}) {
     function handleEditClick() {
         onEditClick(employee);
     }
@@ -13,8 +19,8 @@ function EmployeeItem({ employee, onEditClick, onDeleteClick }) {
                     <input
                         type="checkbox"
                         id="checkbox1"
-                        name="options[]"
-                        value="1"
+                        checked={isSelected}
+                        onChange={() => onToggleSelect(employee.id)}
                     />
                     <label htmlFor="checkbox1"></label>
                 </span>

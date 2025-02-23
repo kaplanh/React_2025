@@ -1,13 +1,42 @@
 import EmployeeItem from "./EmployeeItem";
 
-function EmployeeList({ employees, onEditClick, onDeleteClick }) {
+function EmployeeList({
+    employees,
+    onEditClick,
+    onDeleteClick,
+    selectedEmployees,
+    setSelectedEmployees,
+}) {
+    function toggleSelectAll(event) {
+        if (event.target.checked) {
+            setSelectedEmployees(employees.map((employee) => employee.id));
+        } else {
+            setSelectedEmployees([]);
+        }
+    }
+
+    function toggleSelectEmployee(employeeId) {
+        setSelectedEmployees((prevSelected) =>
+            prevSelected.includes(employeeId)
+                ? prevSelected.filter((id) => id !== employeeId)
+                : [...prevSelected, employeeId]
+        );
+    }
     return (
         <table className="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>
                         <span className="custom-checkbox">
-                            <input type="checkbox" id="selectAll" />
+                            <input
+                                type="checkbox"
+                                id="selectAll"
+                                checked={
+                                    employees.length > 0 &&
+                                    selectedEmployees.length == employees.length
+                                }
+                                onChange={toggleSelectAll}
+                            />
                             <label htmlFor="selectAll"></label>
                         </span>
                     </th>
@@ -27,6 +56,8 @@ function EmployeeList({ employees, onEditClick, onDeleteClick }) {
                         employee={employee}
                         onEditClick={onEditClick}
                         onDeleteClick={onDeleteClick}
+                        isSelected={selectedEmployees.includes(employee.id)}
+                        onToggleSelect={toggleSelectEmployee}
                     />
                 ))}
             </tbody>

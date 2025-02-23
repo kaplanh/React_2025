@@ -1,4 +1,4 @@
-function Header({ onOpenAddModal }) {
+function Header({ onOpenAddModal, onDeleteSelected }) {
     return (
         <div className="table-title">
             <div className="row">
@@ -15,14 +15,13 @@ function Header({ onOpenAddModal }) {
                         <i className="material-icons">&#xE147;</i>{" "}
                         <span>Add New Employee</span>
                     </button>
-                    <a
-                        href="#deleteEmployeeModal"
+                    <button
+                        onClick={onDeleteSelected}
                         className="btn btn-danger"
-                        data-toggle="modal"
                     >
-                        <i className="material-icons">&#xE15C;</i>{" "}
+                        <i className="material-icons">&#xE147;</i>
                         <span>Delete</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
