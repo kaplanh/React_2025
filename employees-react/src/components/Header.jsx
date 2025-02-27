@@ -19,7 +19,7 @@ function Header({ onOpenAddModal, onDeleteSelected }) {
                         onClick={onDeleteSelected}
                         className="btn btn-danger"
                     >
-                        <i className="material-icons">&#xE147;</i>
+                        <i className="material-icons">&#xE15C;</i>{" "}
                         <span>Delete</span>
                     </button>
                 </div>

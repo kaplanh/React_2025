@@ -12,6 +12,7 @@ function EmployeeItem({
     function handleDeleteClick() {
         onDeleteClick(employee);
     }
+
     return (
         <tr>
             <td>
@@ -27,7 +28,7 @@ function EmployeeItem({
             </td>
             <td>{employee.name}</td>
             <td>{employee.email}</td>
-            <td>{employee.address}</td>
+            <td>{employee.address}A</td>
             <td>{employee.phone}</td>
             <td>{employee.gender}</td>
             <td>{employee.department}</td>
