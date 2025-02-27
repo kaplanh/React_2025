@@ -51,7 +51,7 @@ function App() {
         setSelectedEmployee(employee);
     }
     function deleteClick(employee) {
-        console.log("deletedEmployee", employee);
+        // console.log("deletedEmployee", employee);
         const confirmed = window.confirm(
             "Are you sure you want to delete this employee?"
         );
@@ -63,9 +63,15 @@ function App() {
         }
     }
     function deleteSelectedEmployees(employee) {
-        const confirmed = window.confirm(
-            "Are you sure you want to delete the employees?"
-        );
+        let confirmed = false;
+        if (selectedEmployees.length !== 0 && selectedEmployees !== null) {
+            confirmed = window.confirm(
+                "Are you sure you want to delete the employees?"
+            );
+        } else {
+            window.confirm("Please select an employee to delete");
+        }
+
         if (confirmed) {
             setEmployees((prevEmployees) =>
                 prevEmployees.filter(
