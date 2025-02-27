@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import Header from "./components/Header";
-import AddEmployeeModal from "./components/AddEmployeeModal";
 import EmployeeList from "./components/EmployeeList";
-import EditEmployeeModal from "./components/EditEmployeeModal";
+import EmployeeModal from "./components/EmployeeModal";
+// import Pagination from "./components/Pagination";
 
 function App() {
     const [employees, setEmployees] = useState(() => {
@@ -14,6 +14,14 @@ function App() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedEmployees, setSelectedEmployees] = useState([]);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const itemsPerPage = 2;
+
+    // const currentEmployees = useMemo(() => {
+    //     const indexOfLastEmployee = currentPage * itemsPerPage;
+    //     const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+    //     return employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+    // }, [employees, currentPage]);
 
     useEffect(() => {
         localStorage.setItem("employees", JSON.stringify(employees));
@@ -30,31 +38,19 @@ function App() {
     }
 
     function editEmployee(updatedEmployee) {
-        // console.log("updatedEmployee", updatedEmployee);
-        setEmployees((prevEmployees) => {
-            return prevEmployees.map((emp) => {
-                return emp.id === updatedEmployee.id ? updatedEmployee : emp;
-            });
-        });
-
-        // ?asagidaki sekilde süslü kullanmazsak return yazmaya gerek kalmadanda yazabiliriz
-
-        // setEmployees((prevEmployees) =>
-        //     prevEmployees.map((emp) =>
-        //         emp.id === updatedEmployee.id ? updatedEmployee : emp
-        //     )
-        // );
+        setEmployees((prevEmployees) =>
+            prevEmployees.map((emp) =>
+                emp.id === updatedEmployee.id ? updatedEmployee : emp
+            )
+        );
     }
 
     function editClick(employee) {
         setIsEditModalOpen(true);
         setSelectedEmployee(employee);
     }
+
     function deleteClick(employee) {
-        // console.log("deletedEmployee", employee);
-        const confirmed = window.confirm(
-            "Are you sure you want to delete this employee?"
-        );
         if (confirmed) {
             setEmployees((prevEmployees) =>
                 prevEmployees.filter((emp) => emp.id !== employee.id)
@@ -62,15 +58,16 @@ function App() {
             setSelectedEmployees([]);
         }
     }
-    function deleteSelectedEmployees(employee) {
-        let confirmed = false;
-        if (selectedEmployees.length !== 0 && selectedEmployees !== null) {
-            confirmed = window.confirm(
-                "Are you sure you want to delete the employees?"
-            );
-        } else {
-            window.confirm("Please select an employee to delete");
-        }
+
+    function closeEditModal() {
+        setIsEditModalOpen(false);
+        setSelectedEmployee(null);
+    }
+
+    function deleteSelectedEmployees() {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete the employees?"
+        );
 
         if (confirmed) {
             setEmployees((prevEmployees) =>
@@ -82,10 +79,9 @@ function App() {
         }
     }
 
-    function closeEditModal() {
-        setIsEditModalOpen(false);
-        setSelectedEmployee(null);
-    }
+    // function handlePageChange(pageNumber) {
+    //     setCurrentPage(pageNumber);
+    // }
 
     return (
         <div className="container">
@@ -96,27 +92,36 @@ function App() {
                 />
                 <EmployeeList
                     employees={employees}
+                    // employees={currentEmployees}
                     onEditClick={editClick}
                     onDeleteClick={deleteClick}
                     selectedEmployees={selectedEmployees}
                     setSelectedEmployees={setSelectedEmployees}
                 />
-                <AddEmployeeModal
+                <EmployeeModal
+                    mode="add"
                     isOpen={isAddModalOpen}
-                    onCloseAddModal={() => setIsAddModalOpen(false)}
-                    onAddEmployee={addEmployee}
+                    onClose={() => setIsAddModalOpen(false)}
+                    onSubmit={addEmployee}
                 />
-                <EditEmployeeModal
+                <EmployeeModal
+                    mode="edit"
                     isOpen={isEditModalOpen}
                     employee={selectedEmployee}
-                    onCloseEditModal={closeEditModal}
-                    // ? bu sekildede yazilabilir birden fazla satir icin süslü lazim unutma
-                    // onCloseEditModal={() => {
-                    //     setisEditModalOpen(false);
-                    //     setSelectedEmployee(null);
-                    // }}
-                    onEditEmployee={editEmployee}
+                    onClose={closeEditModal}
+                    onSubmit={editEmployee}
                 />
+                {/* <div className="clearfix">
+                    <div className="hint-text">
+                        Showing <b>{currentEmployees.length}</b> out of{" "}
+                        <b>{employees.length}</b> entries
+                    </div>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(employees.length / itemsPerPage)}
+                        onPageChange={handlePageChange}
+                    />
+                </div> */}
             </div>
         </div>
     );
