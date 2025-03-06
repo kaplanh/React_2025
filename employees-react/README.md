@@ -292,3 +292,38 @@ useEffect(() => {
 localStorage.removeItem("employees")
 }, []);
 ```
+
+### drived state(computed state)
+
+```
+    const indexOfLastEmployee = currentPage * itemsPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+    const currentEmployees=employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+```
+
+### drived state(computed state) function hali
+
+```
+    function getCurrentEmployees() {
+        const indexOfLastEmployee = currentPage * itemsPerPage;
+        const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+        return employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+    }
+```
+
+her state degistiginde render edildiginden bunun yerine sadece bagli olunan stateler degistiginde render olsundiye useMemo hook'u kullanilir
+
+### useMemo
+
+useMemo yeniden render işlemleri arasında bir hesaplamanın sonucunu önbelleğe almanızı sağlayan bir React Hook’udur.
+
+```
+const currentEmployees = useMemo(() => {
+        const indexOfLastEmployee = currentPage * itemsPerPage;
+        const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+        return employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+    }, [employees, currentPage]);
+
+
+
+```
