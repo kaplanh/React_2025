@@ -10,11 +10,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
                 <a
                     className="page-link"
-                    onClick={
-                        !currentPage === 1
-                            ? () => onPageChange(currentPage - 1)
-                            : null
-                    }
+                    onClick={() => onPageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                     style={{ cursor: currentPage === 1 ? "" : "pointer" }}
                 >
@@ -46,11 +42,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             >
                 <a
                     className="page-link"
-                    onClick={
-                        !currentPage === totalPages
-                            ? () => onPageChange(currentPage + 1)
-                            : null
-                    }
+                    onClick={() => onPageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
                     style={{
                         cursor: currentPage === totalPages ? "" : "pointer",
