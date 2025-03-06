@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import Header from "./components/Header";
 import EmployeeList from "./components/EmployeeList";
 import EmployeeModal from "./components/EmployeeModal";
-// import Pagination from "./components/Pagination";
+import Pagination from "./components/Pagination";
 
 function App() {
     const [employees, setEmployees] = useState(() => {
@@ -14,14 +14,28 @@ function App() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedEmployees, setSelectedEmployees] = useState([]);
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const itemsPerPage = 2;
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 2;
 
-    // const currentEmployees = useMemo(() => {
+    // !--------------drived state(computed state)---------------
+
+    // const indexOfLastEmployee = currentPage * itemsPerPage;
+    // const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+    // const currentEmployees=employees.slice(indexOfFirstEmployee, indexOfLastEmployee);//* drived state(computed state):var olan bir state den yeni bir state oluşturmak için kullanılır.
+    // !--------------drived state(computed state) function hali---------------
+
+    // function getCurrentEmployees() {
     //     const indexOfLastEmployee = currentPage * itemsPerPage;
     //     const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
     //     return employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
-    // }, [employees, currentPage]);
+    // }
+    //!drived state(computed state) de function yerine useMemo hooku
+
+    const currentEmployees = useMemo(() => {
+        const indexOfLastEmployee = currentPage * itemsPerPage;
+        const indexOfFirstEmployee = indexOfLastEmployee - itemsPerPage;
+        return employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+    }, [employees, currentPage]);
 
     useEffect(() => {
         localStorage.setItem("employees", JSON.stringify(employees));
@@ -79,9 +93,9 @@ function App() {
         }
     }
 
-    // function handlePageChange(pageNumber) {
-    //     setCurrentPage(pageNumber);
-    // }
+    function handlePageChange(pageNumber) {
+        setCurrentPage(pageNumber);
+    }
 
     return (
         <div className="container">
@@ -91,8 +105,9 @@ function App() {
                     onDeleteSelected={deleteSelectedEmployees}
                 />
                 <EmployeeList
-                    employees={employees}
-                    // employees={currentEmployees}
+                    // employees={employees}
+                    // employees={getCurrentEmployees()}
+                    employees={currentEmployees}
                     onEditClick={editClick}
                     onDeleteClick={deleteClick}
                     selectedEmployees={selectedEmployees}
@@ -111,7 +126,7 @@ function App() {
                     onClose={closeEditModal}
                     onSubmit={editEmployee}
                 />
-                {/* <div className="clearfix">
+                <div className="clearfix">
                     <div className="hint-text">
                         Showing <b>{currentEmployees.length}</b> out of{" "}
                         <b>{employees.length}</b> entries
@@ -121,7 +136,7 @@ function App() {
                         totalPages={Math.ceil(employees.length / itemsPerPage)}
                         onPageChange={handlePageChange}
                     />
-                </div> */}
+                </div>
             </div>
         </div>
     );

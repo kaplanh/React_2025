@@ -9,7 +9,7 @@ function EmployeeList({
 }) {
     function toggleSelectAll(event) {
         if (event.target.checked) {
-            setSelectedEmployees(employees.map((employee) => employee.id));
+            setSelectedEmployees(employees.map((emp) => emp.id));
         } else {
             setSelectedEmployees([]);
         }
@@ -22,6 +22,7 @@ function EmployeeList({
                 : [...prevSelected, employeeId]
         );
     }
+
     return (
         <table className="table table-striped table-hover">
             <thead>
@@ -32,7 +33,7 @@ function EmployeeList({
                                 type="checkbox"
                                 id="selectAll"
                                 checked={
-                                    employees.length > 0 &&
+                                    employees?.length > 0 &&
                                     selectedEmployees.length == employees.length
                                 }
                                 onChange={toggleSelectAll}
@@ -50,7 +51,7 @@ function EmployeeList({
                 </tr>
             </thead>
             <tbody>
-                {employees.map((employee) => (
+                {employees?.map((employee) => (
                     <EmployeeItem
                         key={employee.id}
                         employee={employee}
